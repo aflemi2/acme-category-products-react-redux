@@ -15,11 +15,22 @@ const syncAndSeed = ()=>{
   conn.sync({ force:true })
   .then(()=>{
     Promise.all([
-      Product.create({name: '12-Product'}),
-      Product.create({name: '2-Product'}),
-      Product.create({name: '44-Product'}),
-      Category.create({name: '15-Category'}),
-      Category.create({name: '25-Category'})
+      Category.create({name: '15-Category'})
+      .then(category => {
+        Product.create({name: '3-Product'})
+      .then( product => product.setCategory(category));
+      }),
+      Category.create({name: '32-Category'})
+      .then(category => {
+        Product.create({name: '12-Product'})
+      .then( product => product.setCategory(category));
+      }),
+      Category.create({name: '26-Category'})
+      .then(category => {
+        Product.create({name: '44-Product'})
+      .then( product => product.setCategory(category));
+      }),
+      Category.create({name: '39-Category'})
     ]);
   });
 };

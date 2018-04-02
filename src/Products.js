@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Products = ({ products })=> {
   return (
@@ -8,7 +9,7 @@ const Products = ({ products })=> {
         products.map( product => {
           return (
             <li key={ product.id }>
-              { product.name }
+              <Link to={`/products/${product.id}`}>{ product.name }</Link>
             </li>
           );
         })
@@ -18,6 +19,7 @@ const Products = ({ products })=> {
 };
 
 const mapState = ({ products })=> {
+  console.log(products);
   return {
     products
   };

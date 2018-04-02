@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Categories = ({ categories })=> {
   return (
@@ -8,7 +9,7 @@ const Categories = ({ categories })=> {
         categories.map( category => {
           return (
             <li key={ category.id }>
-              { category.name }
+              <Link to={`/categories/${category.id}`}>{ category.name }</Link>
             </li>
           );
         })
