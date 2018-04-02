@@ -19,7 +19,6 @@ const Products = ({ products })=> {
 };
 
 const mapState = ({ products })=> {
-  console.log(products);
   return {
     products
   };

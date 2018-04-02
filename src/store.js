@@ -55,6 +55,20 @@ const loadProducts = ()=>{
   };
 };
 
+const deleteProduct = ( product, history )=>{
+  return (dispatch)=>{
+    return axios.delete(`/api/products/${product.id}`)
+    .then( () => dispatch({
+      type: DELETE_PRODUCT,
+      product
+      })
+    )
+    .then( ()=> {
+      history.push('/products');
+    });
+  };
+};
+
 const loadCategories = ()=>{
   return (dispatch)=>{
     return axios.get('/api/categories')
@@ -77,4 +91,4 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
 
-export { loadProducts, loadCategories };
+export { loadProducts, loadCategories , deleteProduct };
