@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-import { loadProducts } from './store';
+import { loadProducts, loadCategories } from './store';
 import { connect } from 'react-redux';
 import { HashRouter as Router, Route} from 'react-router-dom';
 import Products from './Products';
+import Categories from './Categories';
 
 class App extends Component {
   componentDidMount(){
     this.props.loadProducts();
+    this.props.loadCategories();
   }
   render(){
     return (
@@ -15,6 +17,7 @@ class App extends Component {
         <div>
           <Nav />
           <Route path='/products' exact component={ Products } />
+          <Route path='/categories' exact component={ Categories } />
         </div>
       </Router>
     );
@@ -23,7 +26,8 @@ class App extends Component {
 
 const mapDispatch = (dispatch)=> {
   return {
-    loadProducts: ()=> dispatch(loadProducts())
+    loadProducts: ()=> dispatch(loadProducts()),
+    loadCategories: ()=> dispatch(loadCategories())
   };
 };
 

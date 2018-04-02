@@ -19,6 +19,7 @@ const syncAndSeed = ()=>{
       Product.create({name: '2-Product'}),
       Product.create({name: '44-Product'}),
       Category.create({name: '15-Category'}),
+      Category.create({name: '25-Category'})
     ]);
   });
 };

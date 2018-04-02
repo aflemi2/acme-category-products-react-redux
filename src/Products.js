@@ -17,7 +17,7 @@ const Products = ({ products })=> {
   );
 };
 
-const mapState = ({products })=> {
+const mapState = ({ products })=> {
   return {
     products
   };

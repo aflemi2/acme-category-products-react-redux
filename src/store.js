@@ -54,6 +54,20 @@ const loadProducts = ()=>{
     );
   };
 };
+
+const loadCategories = ()=>{
+  return (dispatch)=>{
+    return axios.get('/api/categories')
+    .then( result => result.data)
+    .then( categories => dispatch({
+      type: SET_CATEGORIES,
+      categories
+      })
+    );
+  };
+};
+
+
 const reducer = combineReducers({
   products: productsReducer,
   categories: categoriesReducer
@@ -63,4 +77,4 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
 
-export { loadProducts };
+export { loadProducts, loadCategories };
