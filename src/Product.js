@@ -13,24 +13,32 @@ class Product extends Component {
   }
 
   render(){
-    const { product } = this.props;
+    const { product, category} = this.props;
     const { onDelete } = this;
+
     if(!product){
+      return null;
+    }
+    if(!category){
       return null;
     }
     return (
       <div>
         <h1>{ product.name }</h1>
+        <h2>Belongs to { category.name }.</h2>
         <button onClick={ onDelete }>Delete Product</button>
       </div>
     );
   }
 }
 
-const mapStateToProps = ( { products }, { id } )=> {
+const mapStateToProps = ( { products, categories }, { id } )=> {
   const product = products.find( product => product.id === id );
+  const category = categories.find( category => category.id === product.categoryId);
+
   return {
-    product
+    product,
+    category
   };
 };
 
