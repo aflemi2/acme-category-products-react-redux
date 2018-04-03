@@ -55,6 +55,18 @@ const loadProducts = ()=>{
   };
 };
 
+const loadCategories = ()=>{
+  return (dispatch)=>{
+    return axios.get('/api/categories')
+    .then( result => result.data)
+    .then( categories => dispatch({
+      type: SET_CATEGORIES,
+      categories
+      })
+    );
+  };
+};
+
 const deleteProduct = ( product, history )=>{
   return (dispatch)=>{
     return axios.delete(`/api/products/${product.id}`)
@@ -69,18 +81,34 @@ const deleteProduct = ( product, history )=>{
   };
 };
 
-const loadCategories = ()=>{
+const deleteCategory = ( category, history )=>{
   return (dispatch)=>{
-    return axios.get('/api/categories')
-    .then( result => result.data)
-    .then( categories => dispatch({
-      type: SET_CATEGORIES,
-      categories
+    return axios.delete(`/api/categories/${category.id}`)
+    .then( () => dispatch({
+      type: DELETE_CATEGORY,
+      category
       })
-    );
+    )
+    .then( ()=> {
+      history.push('/categories');
+    });
   };
 };
 
+const createCategory = ( category, history )=>{
+  return (dispatch)=>{
+    return axios.post('/api/categories', category)
+    .then( result => result.data)
+    .then( category => dispatch({
+      type: CREATE_CATEGORY,
+      category
+      })
+    )
+    .then( ()=> {
+      history.push('/categories');
+    });
+  };
+};
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -91,4 +119,4 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
 
-export { loadProducts, loadCategories , deleteProduct };
+export { loadProducts, loadCategories , deleteProduct, deleteCategory, createCategory };

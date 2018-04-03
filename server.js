@@ -38,12 +38,13 @@ app.delete('/api/products/:id', (req, res, next)=>{
 
 app.post('/api/categories', (req, res, next)=> {
   Category.create(req.body)
-  .then( product => res.send(product))
+  .then( category => res.send(category))
   .catch(next);
 });
 
 app.delete('/api/categories/:id', (req, res, next)=>{
-  Category.findById(req.params.id)
+  Product.destroy({where: {categoryId: req.params.id }})
+  .then( ()=> Category.findById(req.params.id))
   .then( category => category.destroy())
   .then( ()=> res.sendStatus(204))
   .catch(next);

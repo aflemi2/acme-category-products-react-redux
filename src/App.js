@@ -7,6 +7,8 @@ import Products from './Products';
 import Product from './Product';
 import Categories from './Categories';
 import Category from './Category';
+import CategoryCreate from './CategoryCreate';
+import ProductCreate from './ProductCreate';
 
 class App extends Component {
   componentDidMount(){
@@ -20,8 +22,10 @@ class App extends Component {
           <Nav />
           <Route path='/products' exact component={ Products } />
           <Route path='/categories' exact component={ Categories } />
+          <Route path='/categories' exact component={ CategoryCreate } />
           <Route path='/products/:id' exact render={ ({ match })=> <Product id={ match.params.id*1 } />} />
           <Route path='/categories/:id' exact render={ ({ match })=> <Category id={ match.params.id*1 } />} />
+          <Route path='/categories/:id' exact component={ ProductCreate } />
         </div>
       </Router>
     );
